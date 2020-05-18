@@ -15,7 +15,9 @@ Given(`I acces to the VEDI web`, () => {
   //cy.wait('@alias').its('status').should('eq', 200)
 });
 
-When(`I select product {string}`, (tipoCuenta) => {
+
+
+When("I select product {string}", tipoCuenta => {
   cy.contains(tipoCuenta).click() 
   //cy.get('.btn.btn-primary').eq(4).click()
 

@@ -4,5 +4,16 @@
     "cucumber-quick": {
         "tool": "cypress",
         "script": "npx cypress-tags"
-    }
+    },
+    "conf.view.identsBefore.Scenario": 2,
+    "conf.view.identsBefore.ScenarioOutline":2,
+    "conf.view.identsBefore.Examples":4,
+    "conf.view.identsBefore.Given":4,
+    "conf.view.identsBefore.When":5,
+    "conf.view.identsBefore.Then": 5,
+    "conf.view.identsBefore.And": 6,
+    "conf.view.identsBefore.Table":6
+    
 }
+
+
