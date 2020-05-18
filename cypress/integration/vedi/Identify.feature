@@ -13,5 +13,5 @@ Feature: Users can indentify themselve
     Examples:
       | accountType      | document | name         | path |
       | AFP              | 70779263 | MARIO LUIGUI | 0    |
-      | Cuenta Ilimitada | 70779263 | MARIO LUIGUI | 0    |
+      
         
