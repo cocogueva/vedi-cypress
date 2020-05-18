@@ -1,6 +1,6 @@
-import { Given, When, Then, And, when } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
-const url = "https://www.abretucuenta.viabcp.com/#/home"//"https://apeu2appvedic01.azurewebsites.net/#/home";
+const url = "https://apeu2appvedic01.azurewebsites.net/#/home";//"https://www.abretucuenta.viabcp.com/#/home"//
 
 Given(`I acces to the VEDI web`, () => {
   cy.server()
@@ -15,8 +15,6 @@ Given(`I acces to the VEDI web`, () => {
   //cy.wait('@alias').its('status').should('eq', 200)
 });
 
-
-
 When("I select product {string}", tipoCuenta => {
   cy.contains(tipoCuenta).click() 
   //cy.get('.btn.btn-primary').eq(4).click()
@@ -24,10 +22,11 @@ When("I select product {string}", tipoCuenta => {
   if (tipoCuenta == 'Cuenta Premio') { tipoCuenta = 'CERBCP'
   } else if (tipoCuenta == 'Cuenta Ilimitada') {tipoCuenta = 'LIBBCP'
   } else if (tipoCuenta == 'Cuenta Digital') { tipoCuenta = 'PRICTA'
-  } else if (tipoCuenta == AFP) {tipoCuenta = '020'}
+  } else if (tipoCuenta == 'AFP') {tipoCuenta = '020'}
   
   cy.url().should('include', '#/identificar-usuario?codProd='+tipoCuenta)
   //New URL assertion
+
   });
 
 And(`I identify myself with my {string}`, (numDoc) => {
