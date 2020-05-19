@@ -1,13 +1,11 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
 
-const url = "https://apeu2appvedic01.azurewebsites.net/#/home";//"https://www.abretucuenta.viabcp.com/#/home"//
-
 Given(`I acces to the VEDI web`, () => {
   cy.server()
   .route('GET', '/assets/i18n/es.json').as('es.json')
 
-  .visit(url)
+  .visit(Cypress.env('baseUrl'))
   .url().should('include', '/#/home')
   
   

@@ -1,4 +1,7 @@
 {
   "ignoreTestFiles": "*.js",
-  "testFiles": "**/*.{feature,features}"
+  "testFiles": "**/*.{feature,features}",
+  "env":{
+    "baseUrl":"https://apeu2appvedic01.azurewebsites.net"
+  }
 }

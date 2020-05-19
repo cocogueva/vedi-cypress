@@ -1,6 +1,6 @@
 import {  Then, And } from "cypress-cucumber-preprocessor/steps";
 
-//Just the assertion previous steps are implemented at commo steps.
+//Just the assertion previous steps are implemented at common steps.
 
 And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
 
@@ -9,7 +9,7 @@ And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
 
     .get('#txtCardNumber').type(debitCard)
 
-    var passArray = password.split("")
+    var passArray = password.split("") //Splits the password string into an array
 
     //Click password keyboard images
     for (let i = 0; i < 6; i++) {
