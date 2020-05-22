@@ -6,8 +6,8 @@
   "scripts": {
     "test": "cypress run --spec \"**/*.feature\"",
     "test:all": "cypress run --spec \"**/*.features\"",
-    "cypress": "cypress open",
-    "cypress_prod": "cypress open --env baseUrl=https://www.abretucuenta.viabcp.com",
+    "cyp-cert": "cypress open",
+    "cyp-prod": "cypress open --env baseUrl=https://www.abretucuenta.viabcp.com",
     "cucumber": "./node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty"
   },
   "repository": {

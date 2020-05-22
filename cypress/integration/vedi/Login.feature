@@ -12,4 +12,6 @@ As a customer I'm able to login using my debit card number and pasword
 
     Examples:
       | accountType      | document | debitCard        | passsword |
-      | AFP              | 70779207 | 4557885500003531 | 111111    |
+      | Cuenta Digital | 45451696 | 4557880550362358 | 123456    |
+
+      #comentario

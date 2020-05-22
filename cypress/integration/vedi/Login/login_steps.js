@@ -15,12 +15,23 @@ And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
     for (let i = 0; i < 6; i++) {
         cy.get('[src="assets/img/keypad/btn-'+ passArray[i] +'.svg"]').click()
       }
-
-    cy.get('#btnLogin').click()
-
+    
+    cy.route('POST', '/channel/vedi/account-opening/v2/login').as('login-request') 
+    .get('#btnLogin').click()
 
 });
 
 Then(`I'm logged so I'm the shit!`,() =>{
-    //Assertions about the login to be done !
+    
+    cy.server()
+
+    .wait('@login-request').should((xhr) => {
+        expect(xhr.status, 'successful POST').to.equal(200)        
+      })
+
+    .url().should('include', '/#/seleccion-moneda')
+    
 });
+
+
+//rbSoles rbDolares

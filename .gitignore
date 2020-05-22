@@ -62,3 +62,7 @@ typings/
 
 cypress/videos
 cypress/screenshots
+
+#Added by coco 
+*.DS_Store
+*./cypress/.DS_Store

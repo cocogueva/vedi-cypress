@@ -4,6 +4,9 @@ import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 Given(`I acces to the VEDI web`, () => {
   cy.server()
   .route('GET', '/assets/i18n/es.json').as('es.json')
+  .route('POST', '/channel/vedi/account-opening/v2/user-identification/user-information').as('user-information')
+  .route('GET','/channel/vedi/account-opening/v2/captcha/captcha-builder').as('captcha-builder')
+
 
   .visit(Cypress.env('baseUrl'))
   .url().should('include', '/#/home')
@@ -29,16 +32,20 @@ When("I select product {string}", tipoCuenta => {
   });
 
 And(`I identify myself with my {string}`, (numDoc) => {
-
-  cy.server()
-  .route('POST', '/channel/vedi/account-opening/v2/user-identification/user-information').as('user-information')
-
-  .get('#txtDNI').type(numDoc)
+  
+  cy.get('#txtDNI').type(numDoc)
+  
   .get('[formcontrolname="answer"]').click()
+
+  
+  .wait('@captcha-builder').should((xhr) => {
+    window.alert("Ingresa el CAPTCHA!")
+  })
+  
 
   //Delay to wait for the user CAPTCHA validation (Manually)
   .wait('@user-information',{"timeout":20000}).should((xhr) => {
-
+    
     
     expect(xhr.status, 'successful POST').to.equal(200)
     //expect(xhr.response,)
