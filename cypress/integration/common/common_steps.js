@@ -35,19 +35,20 @@ And(`I identify myself with my {string}`, (numDoc) => {
   
   cy.get('#txtDNI').type(numDoc)
   
-  .get('[formcontrolname="answer"]').click()
-
+  var captcha 
   
-  .wait('@captcha-builder').should((xhr) => {
-    window.alert("Ingresa el CAPTCHA!")
+  cy.wait('@captcha-builder').should((xhr) => {    
+      //window.alert("Ingresa el CAPTCHA!") 
+      captcha = prompt("Igresa el código captcha", "CATPCHA");
+      
+      cy.get('[formcontrolname="answer"]').type(captcha).type('{enter}')
   })
-  
 
   //Delay to wait for the user CAPTCHA validation (Manually)
-  .wait('@user-information',{"timeout":20000}).should((xhr) => {
+  .wait('@user-information',{"timeout":9000}).should((xhr) => {
     
     
-    expect(xhr.status, 'successful POST').to.equal(200)
+    expect(xhr.status, 'Respuesta user-information').to.equal(200)
     //expect(xhr.response,)
     //expect(xhr.url, 'post url').to.match(/\/posts$/)
     // assert any other XHR properties
