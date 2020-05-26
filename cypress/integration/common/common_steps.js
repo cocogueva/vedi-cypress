@@ -2,13 +2,8 @@ import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
 
 Given(`I acces to the VEDI web`, () => {
-  cy.server()
-  .route('GET', '/assets/i18n/es.json').as('es.json')
-  .route('POST', '/channel/vedi/account-opening/v2/user-identification/user-information').as('user-information')
-  .route('GET','/channel/vedi/account-opening/v2/captcha/captcha-builder').as('captcha-builder')
-
-
-  .visit(Cypress.env('baseUrl'))
+ 
+  cy.visit(Cypress.env('baseUrl'))
   .url().should('include', '/#/home')
   
   
@@ -45,12 +40,29 @@ And(`I identify myself with my {string}`, (numDoc) => {
   })
 
   //Delay to wait for the user CAPTCHA validation (Manually)
-  .wait('@user-information',{"timeout":9000}).should((xhr) => {
-    
+  .wait('@user-information',{"timeout":14000}).should((xhr) => {
     
     expect(xhr.status, 'Respuesta user-information').to.equal(200)
     //expect(xhr.response,)
     //expect(xhr.url, 'post url').to.match(/\/posts$/)
-    // assert any other XHR properties
   })
 }); 
+
+And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
+
+  cy.get('.btn').contains('SI').click()
+  .url().should('include', '/#/iniciar-sesion')
+
+  .get('#txtCardNumber').type(debitCard)
+
+  var passArray = password.split("") //Splits the password string into an array
+
+  //Click password keyboard images
+  for (let i = 0; i < 6; i++) {
+      cy.get('[src="assets/img/keypad/btn-'+ passArray[i] +'.svg"]').click()
+    }
+  
+  cy.route('POST', '/channel/vedi/account-opening/v2/login').as('login-request') 
+  .get('#btnLogin').click()
+
+});

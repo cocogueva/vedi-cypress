@@ -1,4 +1,4 @@
-Feature: Bank's clients login
+Feature: Bank's active clients login
 
 As a customer I'm able to login using my debit card number and pasword
 
@@ -12,6 +12,9 @@ As a customer I'm able to login using my debit card number and pasword
 
     Examples:
       | accountType      | document | debitCard        | passsword |
-      | Cuenta Digital | 45451696 | 4557880550362358 | 123456    |
+      #| Cuenta Premio    | 70779259 | 4557885500003739 | 111111    |
+      #| Cuenta Ilimitada | 70779263 | 4557885500003747 | 111111    |
+      | Cuenta Digital   | 70779274 | 4557885500003804 | 111111    |
 
-      #comentario
+
+      # 43105562 DNI Equifax
