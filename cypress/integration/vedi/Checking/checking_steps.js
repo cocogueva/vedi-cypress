@@ -19,30 +19,28 @@ Then("I can select a currency, only soles is available",() => {
 });
 
 And("I select to use card option: {string} and select a place", cardOption => {
+    //Seleccion de opcion de tarjeta
     cy.wait('@affiliable-cards').should((xhr) => {
         expect(xhr.status, 'Respuesta afiliable-cards').to.equal(200)
       })
-    cy.url().should('include', '/#/opcion-tarjeta')
+    .url().should('include', '/#/opcion-tarjeta')
 
-    //cy.get('div.cards-item-content-title').eq(1).click()
     .get('[src="/assets/img/cards/'+ cardOption +'.png"]').click()
     
     .get('#btnContinue').click()
-});
 
-Then("I select to use card option: {string} and select a place", cardOption => {
-  cy.wait('@affiliable-cards').should((xhr) => {
-      expect(xhr.status, 'Respuesta afiliable-cards').to.equal(200)
+    //Pantalla de seleccion de sucursal
+    .wait('@branch-offices').should((xhr) => {
+      expect(xhr.status, 'Respuesta branch-offices').to.equal(200)
     })
-  cy.url().should('include', '/#/opcion-tarjeta')
+    .url().should('include', '/#/seleccion-sucursal')
+    
+    .get('[formcontrolname="region"] vd-dropdown-option div.dropdown-item').contains('LIMA').click({force:true})
 
-  //cy.get('div.cards-item-content-title').eq(1).click()
-  .get('[src="/assets/img/cards/'+ cardOption +'.png"]').click()
-  
-  .get('#btnContinue').click()
+    .get('[formcontrolname="city"] vd-dropdown-option div.dropdown-item').contains('LIMA').click({force:true})
 
-  .wait('@branch-offices').should((xhr) => {
-    expect(xhr.status, 'Respuesta branch-offices').to.equal(200)
-  })
-  .url().should('include', '/#/seleccion-sucursal')
+    .get('#btnContinue').click()
+
+    
 });
+
