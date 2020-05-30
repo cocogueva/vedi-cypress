@@ -3,9 +3,11 @@ before(() => {
   cy.server()
   .route('GET', '/assets/i18n/es.json').as('es.json')
   .route('POST', '/channel/vedi/account-opening/v2/user-identification/user-information').as('user-information')
+  .route('GET', '/channel/vedi/account-opening/v2/app-params').as('app-params')
   .route('GET', '/channel/vedi/account-opening/v2/captcha/captcha-builder').as('captcha-builder')
   .route('GET', '/channel/vedi/account-opening/v2/affiliable-cards?**').as('affiliable-cards')
   .route('GET', '/channel/vedi/account-opening/v2/branch-offices').as('branch-offices')
+  .route('POST', '/channel/vedi/account-opening/v2/accounts').as('account-opening')
   
 
 });

@@ -1,6 +1,5 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
-
 Given(`I acces to the VEDI web`, () => {
  
   cy.visit(Cypress.env('baseUrl'))
@@ -27,8 +26,9 @@ When("I select product {string}", tipoCuenta => {
   });
 
 And(`I identify myself with my {string}`, (numDoc) => {
+  cy.wait('@app-params')
   
-  cy.get('#txtDNI').type(numDoc)
+  .get('#txtDNI').type(numDoc)
   
   var captcha 
   
@@ -65,4 +65,76 @@ And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
   cy.route('POST', '/channel/vedi/account-opening/v2/login').as('login-request') 
   .get('#btnLogin').click()
 
+});
+
+Then("I can select a currency: {string}",(currency) => {
+  cy.wait('@login-request')
+
+  cy .url().should('include', '/#/seleccion-moneda')
+  //.get('#rbDolares').should('be.disabled')
+  .get('#rb'+currency).parent().click()
+  .get('#btnContinue').click()
+
+});
+
+And("I select to use card option: {string} and select a place", cardOption => {
+  //Seleccion de opcion de tarjeta
+  cy.wait('@affiliable-cards').should((xhr) => {
+      expect(xhr.status, 'Respuesta afiliable-cards').to.equal(200)
+    })
+  .url().should('include', '/#/opcion-tarjeta')
+
+  .get('[src="/assets/img/cards/'+ cardOption +'.png"]').click()
+  
+  .get('#btnContinue').click()
+
+  //Pantalla de seleccion de sucursal
+  .wait('@branch-offices').should((xhr) => {
+    expect(xhr.status, 'Respuesta branch-offices').to.equal(200)
+  })
+  .url().should('include', '/#/seleccion-sucursal')
+  
+  .get('[formcontrolname="region"] vd-dropdown-option div.dropdown-item').contains('LIMA').click({force:true})
+
+  .get('[formcontrolname="city"] vd-dropdown-option div.dropdown-item').contains('LIMA').click({force:true})
+
+  .get('#btnContinue').click()
+
+  
+});
+
+When("I insert email {string}, acept the terms and confirm", email => {
+cy.url().should('include','/#/resumen-apertura')
+
+//Conditional testing: looking if the addMail exist 
+cy.get('div.account-summary-bottom').then(($div) => {
+
+  if ($div.find('input#chkAddMail').length) {
+
+    cy.get('#chkAddMail').parent().click()
+    .get('#customerAddEmail').type(email)
+    
+  } else {
+
+    cy.get('#customerEmail').type(email) 
+  }
+})
+
+//Checkbox conditions
+cy.get('#chkAgreement').click({force:true})  
+//.get('#chkPdp').click({force:true})
+.get('#chkPep').click({force:true})
+
+//.get('#btnContinue').click()
+
+});
+
+Then("I will see account creation confirm", () => {
+cy.wait('@account-opening').should((xhr) => {
+  expect(xhr.status, 'Respuesta account-opening').to.equal(200)
+})
+
+.url().should('include','/#/confirmacion-apertura')
+
+//.contains('ya tienes una nueva cuenta!').should('be.visible')
 });
