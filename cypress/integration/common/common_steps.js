@@ -34,7 +34,10 @@ And(`I identify myself with my {string}`, (numDoc) => {
   
   cy.wait('@captcha-builder').should((xhr) => {    
       //window.alert("Ingresa el CAPTCHA!") 
-      captcha = prompt("Igresa el código captcha", "CATPCHA");
+      //expect(xhr.status, 'Captcha desplegado').to.equal(200)
+      setTimeout(() => { console.log("CAPTCHA");  }, 500);
+
+      captcha = prompt("Igresa el código captcha", "CATPCHA")
       
       cy.get('[formcontrolname="answer"]').type(captcha).type('{enter}')
   })
