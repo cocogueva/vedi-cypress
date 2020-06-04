@@ -32,14 +32,14 @@ And(`I identify myself with my {string}`, (numDoc) => {
   
   var captcha 
   
+  //Wait for the captcha builder API to respond
   cy.wait('@captcha-builder').should((xhr) => {    
-      //window.alert("Ingresa el CAPTCHA!") 
-      //expect(xhr.status, 'Captcha desplegado').to.equal(200)
-      setTimeout(() => { console.log("CAPTCHA");  }, 500);
-
-      captcha = prompt("Igresa el código captcha", "CATPCHA")
       
-      cy.get('[formcontrolname="answer"]').type(captcha).type('{enter}')
+      //Get the CAPTCHA img element timeout during 3 secs til is visible
+      cy.get('div.captcha-image img',{"timeout":4000}).then( () => {
+        captcha = prompt("Igresa el código captcha", "CATPCHA") 
+        cy.get('[formcontrolname="answer"]').type(captcha).type('{enter}')  
+      })     
   })
 
   //Delay to wait for the user CAPTCHA validation (Manually)

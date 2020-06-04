@@ -6,9 +6,14 @@
   "scripts": {
     "test": "cypress run --spec \"**/*.feature\"",
     "test:all": "cypress run --spec \"**/*.features\"",
-    "cyp-cert": "cypress open",
-    "cyp-prod": "cypress open --env baseUrl=https://www.abretucuenta.viabcp.com",
-    "cucumber": "./node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty"
+    "cypress:certi": "cypress open",
+    "cypress:prod": "cypress open --env baseUrl=https://www.abretucuenta.viabcp.com",
+    "login:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Login.feature'",
+    "login:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Login.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
+    "checking:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Checking.feature'",
+    "checking:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Checking.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
+    "savings:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Savings.feature'",
+    "savings:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Savings.feature' -e baseUrl=https://www.abretucuenta.viabcp.com"
   },
   "repository": {
     "type": "git",
