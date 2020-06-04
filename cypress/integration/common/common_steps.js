@@ -36,7 +36,7 @@ And(`I identify myself with my {string}`, (numDoc) => {
   cy.wait('@captcha-builder').should((xhr) => {    
       
       //Get the CAPTCHA img element timeout during 3 secs til is visible
-      cy.get('div.captcha-image img',{"timeout":4000}).then( () => {
+      cy.get('div.captcha-image img',{"timeout":4000}).should('be.visible').then( () => {
         captcha = prompt("Igresa el código captcha", "CATPCHA") 
         cy.get('[formcontrolname="answer"]').type(captcha).type('{enter}')  
       })     
