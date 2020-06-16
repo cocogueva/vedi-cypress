@@ -1,9 +1,9 @@
-        @feature-tag
+@feature-tag
 Feature: Users can indentify themselve
 
    I want to identify myself as to the app with my document number 
 
-        @tag-to-include
+  @tag-to-include
   Scenario Outline: Bank's customer identifies himself
     Given I acces to the VEDI web
      When I select product "<accountType>"
@@ -11,7 +11,7 @@ Feature: Users can indentify themselve
      Then VEDI identifies me as "<name>" and <path>
     
     Examples:
-      | accountType      | document | name         | path |
-      | AFP              | 70779263 | MARIO LUIGUI | 0    |
+      | accountType      | document | name          | path |
+      | Cuenta Ilimitada | 70779263 | LUCAS NICOLAS | 0    |
       
         

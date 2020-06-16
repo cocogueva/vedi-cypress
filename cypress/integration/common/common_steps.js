@@ -26,20 +26,44 @@ When("I select product {string}", tipoCuenta => {
   });
 
 And(`I identify myself with my {string}`, (numDoc) => {
-  cy.wait('@app-params')
+  cy
+  .wait('@app-params')
   
   .get('#txtDNI').type(numDoc)
   
   var captcha 
+  const baseUrl = Cypress.env('2captchaURL')
+  const api_key = Cypress.env('API_KEY')
   
-  //Wait for the captcha builder API to respond
-  cy.wait('@captcha-builder').should((xhr) => {    
-      
-      //Get the CAPTCHA img element timeout during 3 secs til is visible
-      cy.get('div.captcha-image img',{"timeout":4000}).should('be.visible').then( () => {
+  //Wait for the captcha builder API to respond 
+  cy
+  .wait('@captcha-builder').then( xhr => {    
+    
+    captcha = xhr.response.body['challenge']
+    
+    //Send BASE64 to captcha solver API
+    cy
+    .request('POST',`${baseUrl}/in.php?key=${api_key}&method=base64&phrase=0&json=1`,{body: captcha})
+    .then( response => {
+        expect(response.status).to.eq(200)
+        var captchaID = response.body['request']
+
+        cy
+        .wait(4000)
+        .request(`${baseUrl}/res.php?key=${api_key}&action=get&json=1&ID=${captchaID}`)
+        .then( response =>{
+
+            expect(response.body['request']).not.eq('CAPCHA_NOT_READY')
+            var captcha = response.body['request']
+            cy.get('[formcontrolname="answer"]').type(captcha).type('{enter}')
+        })
+    }) 
+      //OLD: Get the CAPTCHA img element timeout during 3 secs til is visible
+      /*cy
+      .get('div.captcha-image img',{"timeout":4000}).should('be.visible').then( () => {
         captcha = prompt("Igresa el código captcha", "CATPCHA") 
         cy.get('[formcontrolname="answer"]').type(captcha).type('{enter}')  
-      })     
+      })*/
   })
 
   //Delay to wait for the user CAPTCHA validation (Manually)
@@ -128,7 +152,7 @@ cy.get('#chkAgreement').click({force:true})
 //.get('#chkPdp').click({force:true})
 .get('#chkPep').click({force:true})
 
-//.get('#btnContinue').click()
+.get('#btnContinue').click()
 
 });
 

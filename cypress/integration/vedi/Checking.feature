@@ -1,6 +1,6 @@
 Feature: Open checking account flow
 
-  As a customer I'm able to open a checking account
+      As a customer I'm able to open a checking account
 
   Scenario Outline: Bank's customer opens a checking account
     Given I acces to checking account URL
@@ -12,9 +12,10 @@ Feature: Open checking account flow
      Then I will see account creation confirm
 
 
-    Examples:
+  Examples:
       | document | debitCard  | passsword | cardOption  |
-      #Cliente Activo
-      | 45451696 | 0550362358 | 123456    | sin-tarjeta |
+      #Clientes Activos
+      #| 45451696 | 0550362358 | 123456    | sin-tarjeta |
+      | 70779276 | 5500003812 | 111111    | nueva-tarjeta |
       #Cliente Equifax
-      #| 70779259 | 4557885500003739 | 111111    |
+      #| 77037046 | no-card    | -          | sin-tarjeta |

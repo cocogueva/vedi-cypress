@@ -64,5 +64,6 @@ cypress/videos
 cypress/screenshots
 
 #Added by coco 
-*.DS_Store
-*./cypress/.DS_Store
+.DS_Store
+./cypress/.DS_Store
+./cypress/integration/news/*

@@ -1,6 +1,6 @@
 Feature: Open savings account flow
 
-  As a customer I'm able to open a savings account
+      As a customer I'm able to open a savings account
 
   Scenario Outline: Bank's customer opens a savings account
     Given I acces to the VEDI web
@@ -13,9 +13,12 @@ Feature: Open savings account flow
      Then I will see account creation confirm
 
 
-    Examples:
+  Examples:
       | accountType      | document | debitCard  | passsword | currency | cardOption  |
-      #| Cuenta Premio    | 70779259 | 5500003739 | 111111    |
-      #| Cuenta Ilimitada | 70779263 | 5500003747 | 111111    |
-      | Cuenta Digital   | 70779274 | 5500003804 | 111111    | Dolares | sin-tarjeta |
-      #| Cuenta Digital   | 45451696 | 0550362358 | 123456    | Soles | sin-tarjeta |
+      #| Cuenta Premio    | 70779259 | 5500003739 | 111111    | Dolares | sin-tarjeta |
+      | Cuenta Ilimitada | 70779263 | 5500003747 | 111111    | Dolares | nueva-tarjeta |
+      #| Cuenta Digital   | 70779274 | 5500003804 | 111111    | Dolares | sin-tarjeta |
+      
+      #| Cuenta Premio    | 45451696 | 0550362358 | 123456    | Dolares | sin-tarjeta |
+      #| Cuenta Ilimitada | 45451696 | 0550362358 | 123456    | Soles   | sin-tarjeta |
+      #| Cuenta Digital   | 45451696 | 0550362358 | 123456    | Soles   | sin-tarjeta |
