@@ -14,7 +14,8 @@
     "checking:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Checking.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
     "savings:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Savings.feature'" ,
     "savings:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Savings.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
-    "@wip": "cypress-tags run -C cypress.json -e TAGS='@wip' -b chrome --no-exit"
+    "@wip": "cypress-tags run -C cypress.json -e TAGS='@wip' -b chrome --no-exit",
+    "pepe": "-e baseUrl=https://www.abretucuenta.viabcp.com auto-captcha=false"
   },
   "repository": {
     "type": "git",

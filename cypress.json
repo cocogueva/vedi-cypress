@@ -4,6 +4,7 @@
   "env":{
     "baseUrl":"https://apeu2appvedic01.azurewebsites.net",
     "2captchaURL": "https://2captcha.com",
-    "API_KEY": "1a26557117038f3c3a04179212e5859f"
+    "API_KEY": "1a26557117038f3c3a04179212e5859f",
+    "auto-captcha":true
   }
 }
