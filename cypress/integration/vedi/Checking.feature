@@ -1,7 +1,7 @@
 Feature: Open checking account flow
 
-      As a customer I'm able to open a checking account
-
+      As a customer I'm able to open a checking accounts
+      
   Scenario Outline: Bank's customer opens a checking account
     Given I acces to checking account URL
      When I identify myself with my "<document>"
@@ -11,11 +11,16 @@ Feature: Open checking account flow
      When I insert email "j.guevara@globant.com", acept the terms and confirm
      Then I will see account creation confirm
 
-
   Examples:
       | document | debitCard  | passsword | cardOption  |
-      #Clientes Activos
-      #| 45451696 | 0550362358 | 123456    | sin-tarjeta |
-      | 70779276 | 5500003812 | 111111    | nueva-tarjeta |
       #Cliente Equifax
       #| 77037046 | no-card    | -          | sin-tarjeta |
+      #Clientes Activos
+      #| 45451696 | 0550362358 | 123456    | sin-tarjeta |
+      | 29623550 | 6000010893 | 111111    | nueva-tarjeta |
+  @wip
+  Scenario: Bank's customer attemps to open a 2nd checking account
+    Given I acces to checking account URL
+     When I identify myself with my "70779276"
+      And I log in to VEDI with my "5500003812" and "111111"
+     Then I would see a pop-up bloqs the flow

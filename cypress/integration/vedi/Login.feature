@@ -1,6 +1,6 @@
 Feature: Bank's active clients login
 
-As a customer I'm able to login using my debit card number and pasword
+      As a customer I'm able to login using my debit card number and pasword
 
   Scenario Outline: Bank's customer logs in to VEDI
     Given I acces to the VEDI web
@@ -10,7 +10,7 @@ As a customer I'm able to login using my debit card number and pasword
      Then I'm logged so I'm the shit!
 
 
-    Examples:
+  Examples:
       | accountType      | document | debitCard  | passsword |
       #| Cuenta Premio    | 70779259 | 5500003739 | 111111    |
       #| Cuenta Ilimitada | 70779263 | 5500003747 | 111111    |

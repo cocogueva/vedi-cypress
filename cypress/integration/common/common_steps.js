@@ -49,7 +49,7 @@ And(`I identify myself with my {string}`, (numDoc) => {
         var captchaID = response.body['request']
 
         cy
-        .wait(4000)
+        .wait(5000)
         .request(`${baseUrl}/res.php?key=${api_key}&action=get&json=1&ID=${captchaID}`)
         .then( response =>{
 
@@ -67,7 +67,7 @@ And(`I identify myself with my {string}`, (numDoc) => {
   })
 
   //Delay to wait for the user CAPTCHA validation (Manually)
-  .wait('@user-information',{"timeout":14000}).should((xhr) => {
+  .wait('@user-information',{"timeout":15000}).should((xhr) => {
     
     expect(xhr.status, 'Respuesta user-information').to.equal(200)
     //expect(xhr.response,)

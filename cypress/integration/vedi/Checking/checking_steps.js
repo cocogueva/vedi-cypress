@@ -17,3 +17,13 @@ Given("I acces to checking account URL", () => {
     .get('#btnContinue').click()
   
   });
+
+  Then("I would see a pop-up bloqs the flow", () => {
+    cy
+    .wait('@login-request').then( xhr => {  
+      //expect(xhr.response.status).to.eq(400)  
+    })
+
+    .get('div.modal-dialog p').should('have.text',' Ya tienes una Cuenta Contigo BCP y podrás usarla para recibir el retiro de hasta el 25% de tu fondo de AFP. ')
+
+  });
