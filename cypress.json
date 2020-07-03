@@ -1,10 +1,11 @@
 {
   "ignoreTestFiles": "*.js",
   "testFiles": "**/*.{feature,features}",
-  "env":{
-    "baseUrl":"https://apeu2appvedic01.azurewebsites.net",
+  "env": {
+    "baseUrl": "https://apeu2appvedic01.azurewebsites.net",
     "2captchaURL": "https://2captcha.com",
     "API_KEY": "1a26557117038f3c3a04179212e5859f",
-    "auto-captcha":true
-  }
+    "auto-captcha": false
+  },
+  "projectId": "c89kyf"
 }

@@ -15,8 +15,8 @@ Feature: Open savings account flow
 
   Examples:
       | accountType      | document | debitCard  | passsword | currency | cardOption  |
-      #| Cuenta Premio    | 70779259 | 5500003739 | 111111    | Dolares | sin-tarjeta |
-      | Cuenta Ilimitada | 70779263 | 5500003747 | 111111    | Dolares | nueva-tarjeta |
+      | Cuenta Premio    | 29623550 | 6000010893 | 111111    | Soles | nueva-tarjeta |
+      #| Cuenta Ilimitada | 70779263 | 5500003747 | 111111    | Dolares | nueva-tarjeta |
       #| Cuenta Digital   | 70779274 | 5500003804 | 111111    | Dolares | sin-tarjeta |
       
       #| Cuenta Premio    | 45451696 | 0550362358 | 123456    | Dolares | sin-tarjeta |

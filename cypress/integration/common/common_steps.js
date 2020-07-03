@@ -104,7 +104,7 @@ And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
 });
 
 Then("I can select a currency: {string}",(currency) => {
-  cy.wait('@login-request')
+  cy.wait('@login-request',{"timeout":10000})
 
   cy .url().should('include', '/#/seleccion-moneda')
   //.get('#rbDolares').should('be.disabled')
@@ -173,4 +173,28 @@ cy.wait('@account-opening').should((xhr) => {
 .url().should('include','/#/confirmacion-apertura')
 
 //.contains('ya tienes una nueva cuenta!').should('be.visible')
+});
+
+And("I answer equifax security questions", () => {
+  cy
+  .get('.btn').contains('SI').click()
+
+  .wait('@equifax-questions').should((xhr) => {
+    expect(xhr.status, 'Respuesta Authentication-questions').to.equal(200)
+})
+
+  .url().should('include','/#/equifax')
+
+  .get('#optionn-0-0').click({force:true})
+
+  .get('#optionn-1-0').click({force:true})
+  
+  .get('#optionn-2-0').click({force:true})
+
+  .get('#btnContinue').click()
+
+  .wait('@validate').should((xhr) => {
+    expect(xhr.status, 'Respuesta account-opening').to.equal(200)
+  })
+
 });

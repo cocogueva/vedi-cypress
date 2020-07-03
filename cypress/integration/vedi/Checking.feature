@@ -17,7 +17,7 @@ Feature: Open checking account flow
       #| 77037046 | no-card    | -          | sin-tarjeta |
       #Clientes Activos
       #| 45451696 | 0550362358 | 123456    | sin-tarjeta |
-      | 29623550 | 6000010893 | 111111    | nueva-tarjeta |
+      | 70779274 | 5500003804 | 111111    | nueva-tarjeta |
   @wip
   Scenario: Bank's customer attemps to open a 2nd checking account
     Given I acces to checking account URL
