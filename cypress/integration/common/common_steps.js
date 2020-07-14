@@ -12,16 +12,20 @@ Given(`I acces to the VEDI web`, () => {
 });
 
 When("I select product {string}", tipoCuenta => {
-  cy.contains(tipoCuenta).click() 
-  //cy.get('.btn.btn-primary').eq(4).click()
 
   if (tipoCuenta == 'Cuenta Premio') { tipoCuenta = 'CERBCP'
   } else if (tipoCuenta == 'Cuenta Ilimitada') {tipoCuenta = 'LIBBCP'
   } else if (tipoCuenta == 'Cuenta Digital') { tipoCuenta = 'PRICTA'
   } else if (tipoCuenta == 'AFP') {tipoCuenta = '020'}
   
-  cy.url().should('include', '#/identificar-usuario?codProd='+tipoCuenta)
+  cy
+  .get('a[href="/#/identificar-usuario?codProd='+ tipoCuenta +'"]').click({multiple:true,force:true})
+  //.contains(tipoCuenta).click()  //Without Tag manager JS injection this used to work !
+  //.get('.btn.btn-primary').eq(4).click()
+
   //New URL assertion
+  .url().should('include', '#/identificar-usuario?codProd='+tipoCuenta)
+  
 
   });
 
@@ -194,7 +198,7 @@ And("I answer equifax security questions", () => {
   .get('#btnContinue').click()
 
   .wait('@validate').should((xhr) => {
-    expect(xhr.status, 'Respuesta account-opening').to.equal(200)
+    expect(xhr.status, 'Respuesta equifax-validation').to.equal(200)
   })
 
 });
