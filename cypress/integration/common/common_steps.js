@@ -170,7 +170,22 @@ cy.get('#chkAgreement').click({force:true})
 });
 
 Then("I will see account creation confirm", () => {
-cy.wait('@account-opening').should((xhr) => {
+var openApi
+
+var today = new Date()
+var inicioExtend = new Date();
+inicioExtend.setHours(10,30,0); // 5.30 pm
+var finExtend = new Date();
+finExtend.setHours(20,30,0); // 6.30 pm
+
+if (today >= inicioExtend && today <= finExtend) {
+  openApi = "@account-extends" 
+} else {
+  openApi = "@account-opening"
+}
+  
+cy
+.wait(openApi).should((xhr) => {
   expect(xhr.status, 'Respuesta account-opening').to.equal(200)
 })
 
