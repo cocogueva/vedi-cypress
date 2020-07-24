@@ -1,7 +1,7 @@
 @feature-tag
 Feature: Users can indentify themselve
 
-   I want to identify myself as to the app with my document number 
+      I want to identify myself as to the app with my document number
 
   @tag-to-include
   Scenario Outline: Bank's customer identifies himself
@@ -10,8 +10,8 @@ Feature: Users can indentify themselve
       And I identify myself with my "<document>"
      Then VEDI identifies me as "<name>" and <path>
     
-    Examples:
+  Examples:
       | accountType      | document | name          | path |
-      | Cuenta Ilimitada | 70779263 | LUCAS NICOLAS | 0    |
+      | Cuenta Ilimitada | 70779263 | MARIO LUIGUI   | 0    |
       
         

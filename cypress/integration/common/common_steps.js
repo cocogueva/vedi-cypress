@@ -83,7 +83,7 @@ And(`I identify myself with my {string}`, (numDoc) => {
   .wait('@user-information',{"timeout":15000}).should((xhr) => {
     
     expect(xhr.status, 'Respuesta user-information').to.equal(200)
-    //expect(xhr.response,)
+    //expect(xhr.response.path,'')
     //expect(xhr.url, 'post url').to.match(/\/posts$/)
   })
 }); 
@@ -117,7 +117,7 @@ Then("I can select a currency: {string}",(currency) => {
 
 });
 
-And("I select to use card option: {string} and select a place", cardOption => {
+And("I select to use card option: {string} and select a place: {string},{string}", (cardOption, region, city) => {
   //Seleccion de opcion de tarjeta
   cy.wait('@affiliable-cards').should((xhr) => {
       expect(xhr.status, 'Respuesta afiliable-cards').to.equal(200)
@@ -125,7 +125,12 @@ And("I select to use card option: {string} and select a place", cardOption => {
   .url().should('include', '/#/opcion-tarjeta')
 
   .get('[src="/assets/img/cards/'+ cardOption +'.png"]').click()
+
+  if(cardOption == 'vincular-tarjeta') {
+    cy.get('button').contains('Vincular').click() //Sera el primer boton?
+  };
   
+  cy
   .get('#btnContinue').click()
 
   //Pantalla de seleccion de sucursal
@@ -134,9 +139,9 @@ And("I select to use card option: {string} and select a place", cardOption => {
   })
   .url().should('include', '/#/seleccion-sucursal')
   
-  .get('[formcontrolname="region"] vd-dropdown-option div.dropdown-item').contains('LIMA').click({force:true})
+  .get('[formcontrolname="region"] vd-dropdown-option div.dropdown-item').contains(region).click({force:true})
 
-  .get('[formcontrolname="city"] vd-dropdown-option div.dropdown-item').contains('LIMA').click({force:true})
+  .get('[formcontrolname="city"] vd-dropdown-option div.dropdown-item').contains(city).click({force:true})
 
   .get('#btnContinue').click()
 
@@ -215,5 +220,24 @@ And("I answer equifax security questions", () => {
   .wait('@validate').should((xhr) => {
     expect(xhr.status, 'Respuesta equifax-validation').to.equal(200)
   })
+
+});
+
+And("I will buy an insurance type {string}", text => {
+  cy
+  .get('#ElBanner').click()
+
+  //Some web that shows ingo
+
+  .get('.btn.btn-primary').click()  //Comprar Seguro
+  
+  .url().should('include','/#/resumen')
+
+  .get('#bcp-cb-0-lbl').click({force:true})
+
+  .get('.btn.btn-primary').click() //Finalizar compra
+
+  .url().should('include','/#/compra-done')
+
 
 });
