@@ -10,11 +10,11 @@ Feature: Bank's active clients login
      Then I'm logged so I'm the shit!
 
 
-  Examples:
-      | accountType      | document | debitCard  | passsword |
+    Examples:
+      | accountType | document | debitCard | passsword |
       #| Cuenta Premio    | 70779259 | 5500003739 | 111111    |
       #| Cuenta Ilimitada | 70779263 | 5500003747 | 111111    |
-      | Cuenta Digital   | 70779274 | 5500003804 | 111111    |
+      | Cuenta Digital | 70779265 | 5500003762 | 111111 |
 
 
       # 43105562 DNI Equifax

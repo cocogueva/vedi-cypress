@@ -14,9 +14,9 @@ Feature: Open savings account flow
       #And I will buy an insurance type "foo"
 
     Examples:
-      | accountType    | document | debitCard  | passsword | currency | cardOption       | region      | city     |
-      | Cuenta Premio  | 29623550 | 6000010893 | 111111    | Dolares  | vincular-tarjeta | LAMBAYEQUE  | CHICLAYO |
-      | Cuenta Digital | 70779274 | 5500003804 | 111111    | Soles    | nueva-tarjeta    | LA LIBERTAD | TRUJILLO |
+      | accountType   | document | debitCard  | passsword | currency | cardOption       | region     | city     |
+      | Cuenta Premio | 29623550 | 6000010893 | 111111    | Soles    | vincular-tarjeta | LAMBAYEQUE | CHICLAYO |
+      #| Cuenta Digital | 70779274 | 5500003804 | 111111    | Soles    | nueva-tarjeta    | LA LIBERTAD | TRUJILLO |
       #| Cuenta Ilimitada | 70779263 | 5500003747 | 111111    | Dolares  | nueva-tarjeta |
        
       

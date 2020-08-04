@@ -127,7 +127,7 @@ And("I select to use card option: {string} and select a place: {string},{string}
   .get('[src="/assets/img/cards/'+ cardOption +'.png"]').click()
 
   if(cardOption == 'vincular-tarjeta') {
-    cy.get('button').contains('Vincular').click() //Sera el primer boton?
+    cy.get('button').contains('Vincular').click() //Devuelve el primer boton vincular
   };
   
   cy
