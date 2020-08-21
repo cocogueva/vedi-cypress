@@ -90,7 +90,7 @@ And(`I identify myself with my {string}`, (numDoc) => {
 
 And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
 
-  cy.get('.btn').contains('SI').click()
+  cy.get('button.btn-primary.btn-block').eq(0).click() //Primer button primary
   .url().should('include', '/#/iniciar-sesion')
 
   .get('#txtCardNumber').type(debitCard)
@@ -179,9 +179,9 @@ var openApi
 
 var today = new Date()
 var inicioExtend = new Date();
-inicioExtend.setHours(10,30,0); // 5.30 pm
+inicioExtend.setHours(20,30,0); // 8.30 pm
 var finExtend = new Date();
-finExtend.setHours(20,30,0); // 6.30 pm
+finExtend.setHours(3,59,0); // 4.00 am
 
 if (today >= inicioExtend && today <= finExtend) {
   openApi = "@account-extends" 

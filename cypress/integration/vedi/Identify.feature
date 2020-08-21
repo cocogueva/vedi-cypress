@@ -10,8 +10,8 @@ Feature: Users can indentify themselve
       And I identify myself with my "<document>"
      Then VEDI identifies me as "<name>" and <path>
     
-  Examples:
-      | accountType      | document | name          | path |
-      | Cuenta Ilimitada | 70779263 | MARIO LUIGUI   | 0    |
+    Examples:
+      | accountType      | document | name         | path |
+      | Cuenta Ilimitada | 70779270 | MARIO LUIGUI | 0    |
       
         

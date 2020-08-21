@@ -12,17 +12,17 @@ Feature: Open checking account flow
      Then I will see account creation confirm
 
     Examples:
-      | document | debitCard  | passsword | cardOption  | region | city  |
-      | 70779207 | 5500003531 | 111111    | sin-tarjeta | CUSCO  | CUSCO |
+      | document | debitCard  | passsword | cardOption    | region | city  |
+      | 70779082 | 5300048587 | 111111    | nueva-tarjeta | CUSCO  | CUSCO |
       #Clientes Activos
       #| 45451696 | 0550362358 | 123456    | sin-tarjeta |
       #Cliente Equifax
       #| 77037046 | no-card    | -          | sin-tarjeta |
       
       
-  @wip
-  Scenario: Bank's customer attemps to open a 2nd checking account
-    Given I acces to checking account URL
-     When I identify myself with my "45451696"
-      And I log in to VEDI with my "5500003812" and "111111"
-     Then I would see a pop-up bloqs the flow
+  #@wip
+  #Scenario: Bank's customer attemps to open a 2nd checking account
+  #  Given I acces to checking account URL
+  #   When I identify myself with my "45451696"
+  #    And I log in to VEDI with my "5500003812" and "111111"
+  #   Then I would see a pop-up bloqs the flow
