@@ -37,14 +37,11 @@
     "cypress-cucumber-preprocessor": "^1.16.2"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "nonGlobalStepDefinitions": false,
+    "commonPath": "cypress/support/step_definitions/common/"
+
   },
   "devDependencies": {
-<<<<<<< HEAD
     "cypress": "^5.1.0"
-=======
-    "cypress": "^4.5.0",
-    "eslint": "^7.7.0"
->>>>>>> parent of d2c77ff... cypress@5.0.0 update
   }
 }
