@@ -40,11 +40,6 @@
     "nonGlobalStepDefinitions": true
   },
   "devDependencies": {
-<<<<<<< HEAD
     "cypress": "^5.1.0"
-=======
-    "cypress": "^4.5.0",
-    "eslint": "^7.7.0"
->>>>>>> parent of d2c77ff... cypress@5.0.0 update
   }
 }
