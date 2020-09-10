@@ -5,6 +5,12 @@
         "tool": "cypress",
         "script": "npx cypress-tags"
     },
+
+    "cucumberautocomplete.steps": [
+        "**/*_steps.js"
+    ],
+    "cucumberautocomplete.syncfeatures": "**/*.{feature,features}",
+
     "conf.view.identsBefore.Scenario": 2,
     "conf.view.identsBefore.ScenarioOutline":2,
     "conf.view.identsBefore.Examples":4,
