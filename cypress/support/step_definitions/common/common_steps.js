@@ -1,4 +1,7 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import cardOptionPage from "../../page-objects/cardOptionPage";
+import selectBranchPage from "../../page-objects/selectBranchPage";
+import cardOptionPage from "../../page-objects/selectBranchPage";
 
 Given(`I acces to the VEDI web`, () => {
  
@@ -119,31 +122,29 @@ Then("I can select a currency: {string}",(currency) => {
 
 And("I select to use card option: {string} and select a place: {string},{string}", (cardOption, region, city) => {
   //Seleccion de opcion de tarjeta
-  cy.wait('@affiliable-cards').should((xhr) => {
-      expect(xhr.status, 'Respuesta afiliable-cards').to.equal(200)
-    })
-  .url().should('include', '/#/opcion-tarjeta')
 
-  .get('[src="/assets/img/cards/'+ cardOption +'.png"]').click()
-
-  if(cardOption == 'vincular-tarjeta') {
-    cy.get('button').contains('Vincular').click() //Devuelve el primer boton vincular
-  };
-  
   cy
-  .get('#btnContinue').click()
+  .wait('@affiliable-cards').should((xhr) => {
+    expect(xhr.status, 'Respuesta afiliable-cards').to.equal(200)
+  })
+
+  cardOptionPage.getUrl().should('include', '/#/opcion-tarjeta')
+
+  cardOptionPage.selectOption(cardOption)
+  
+  cardOptionPage.clickContinue()  
 
   //Pantalla de seleccion de sucursal
+
   .wait('@branch-offices').should((xhr) => {
     expect(xhr.status, 'Respuesta branch-offices').to.equal(200)
   })
-  .url().should('include', '/#/seleccion-sucursal')
+
+  cardOptionPage.getUrl().should('include', '/#/seleccion-sucursal')
   
-  .get('[formcontrolname="region"] vd-dropdown-option div.dropdown-item').contains(region).click({force:true})
+  selectBranchPage.selectBranch(region,city)
 
-  .get('[formcontrolname="city"] vd-dropdown-option div.dropdown-item').contains(city).click({force:true})
-
-  .get('#btnContinue').click()
+  cardOptionPage.clickContinue()
 
   
 });
