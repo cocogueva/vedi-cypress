@@ -1,7 +1,7 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 import cardOptionPage from "../../page-objects/cardOptionPage";
 import selectBranchPage from "../../page-objects/selectBranchPage";
-import cardOptionPage from "../../page-objects/selectBranchPage";
+import summaryPage from "../../page-objects/summaryPage";
 
 Given(`I acces to the VEDI web`, () => {
  
@@ -145,33 +145,18 @@ And("I select to use card option: {string} and select a place: {string},{string}
   selectBranchPage.selectBranch(region,city)
 
   cardOptionPage.clickContinue()
-
   
 });
 
 When("I insert email {string}, acept the terms and confirm", email => {
-cy.url().should('include','/#/resumen-apertura')
 
-//Conditional testing: looking if the addMail exist 
-cy.get('div.account-summary-bottom').then(($div) => {
+cardOptionPage.getUrl().should('include','/#/resumen-apertura')
 
-  if ($div.find('input#chkAddMail').length) {
+summaryPage.addEmail(email)
 
-    cy.get('#chkAddMail').parent().click()
-    .get('#customerAddEmail').type(email)
-    
-  } else {
+summaryPage.selectChkbox()
 
-    cy.get('#customerEmail').type(email) 
-  }
-})
-
-//Checkbox conditions
-cy.get('#chkAgreement').click({force:true})  
-//.get('#chkPdp').click({force:true})
-.get('#chkPep').click({force:true})
-
-.get('#btnContinue').click()
+cardOptionPage.clickContinue()
 
 });
 
