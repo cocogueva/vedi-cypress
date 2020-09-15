@@ -2,6 +2,7 @@ import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 import cardOptionPage from "../../page-objects/cardOptionPage";
 import selectBranchPage from "../../page-objects/selectBranchPage";
 import summaryPage from "../../page-objects/summaryPage";
+import utils from "../../utils/utils"
 
 Given(`I acces to the VEDI web`, () => {
  
@@ -180,7 +181,7 @@ cy
   expect(xhr.status, 'Respuesta account-opening').to.equal(200)
 })
 
-.url().should('include','/#/confirmacion-apertura')
+cardOptionPage.getUrl().should('include','/#/confirmacion-apertura')
 
 //.contains('ya tienes una nueva cuenta!').should('be.visible')
 });
