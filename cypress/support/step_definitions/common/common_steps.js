@@ -162,52 +162,14 @@ cardOptionPage.clickContinue()
 });
 
 Then("I will see account creation confirm", () => {
-var openApi
 
-var today = new Date()
-var inicioExtend = new Date();
-inicioExtend.setHours(20,30,0); // 8.30 pm
-var finExtend = new Date();
-finExtend.setHours(3,59,0); // 4.00 am
-
-if (today >= inicioExtend && today <= finExtend) {
-  openApi = "@account-extends" 
-} else {
-  openApi = "@account-opening"
-}
-  
-cy
-.wait(openApi).should((xhr) => {
+cy.wait(utils.getSchedule).should((xhr) => {
   expect(xhr.status, 'Respuesta account-opening').to.equal(200)
 })
 
 cardOptionPage.getUrl().should('include','/#/confirmacion-apertura')
 
 //.contains('ya tienes una nueva cuenta!').should('be.visible')
-});
-
-And("I answer equifax security questions", () => {
-  cy
-  .get('.btn').contains('SI').click()
-
-  .wait('@equifax-questions').should((xhr) => {
-    expect(xhr.status, 'Respuesta Authentication-questions').to.equal(200)
-})
-
-  .url().should('include','/#/equifax')
-
-  .get('#optionn-0-0').click({force:true})
-
-  .get('#optionn-1-0').click({force:true})
-  
-  .get('#optionn-2-0').click({force:true})
-
-  .get('#btnContinue').click()
-
-  .wait('@validate').should((xhr) => {
-    expect(xhr.status, 'Respuesta equifax-validation').to.equal(200)
-  })
-
 });
 
 And("I will buy an insurance type {string}", text => {
