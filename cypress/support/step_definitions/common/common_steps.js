@@ -112,7 +112,7 @@ And(`I log in to VEDI with my {string} and {string}`, (debitCard,password) => {
 });
 
 Then("I can select a currency: {string}",(currency) => {
-  cy.wait('@login-request',{"timeout":10000})
+  cy.wait('@login-request',{"timeout":16000})
 
   cy .url().should('include', '/#/seleccion-moneda')
   //.get('#rbDolares').should('be.disabled')
@@ -124,8 +124,7 @@ Then("I can select a currency: {string}",(currency) => {
 And("I select to use card option: {string} and select a place: {string},{string}", (cardOption, region, city) => {
   //Seleccion de opcion de tarjeta
 
-  cy
-  .wait('@affiliable-cards').should((xhr) => {
+  cy.wait('@affiliable-cards').should((xhr) => {
     expect(xhr.status, 'Respuesta afiliable-cards').to.equal(200)
   })
 
@@ -137,7 +136,7 @@ And("I select to use card option: {string} and select a place: {string},{string}
 
   //Pantalla de seleccion de sucursal
 
-  .wait('@branch-offices').should((xhr) => {
+  cy.wait('@branch-offices').should((xhr) => {
     expect(xhr.status, 'Respuesta branch-offices').to.equal(200)
   })
 
