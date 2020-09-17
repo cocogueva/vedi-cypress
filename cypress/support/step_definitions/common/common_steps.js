@@ -1,12 +1,12 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
-import homePage from "../../pages/homePage";
+import homePage from "../../page-objects/homePage";
 import utils from "../../utils/utils";
-import accountsPage from "../../pages/accountsPage";
-import requirementsPage from "../../pages/requirementsPage";
-import validationPage from "../../pages/validationPage";
-import currencyPage from "../../pages/currencyPage";
-import cardsPage from "../../pages/cardsPage";
-import placePage from "../../pages/placePage";
+import accountsPage from "../../page-objects/accountsPage";
+import requirementsPage from "../../page-objects/requirementsPage";
+import validationPage from "../../page-objects/validationPage";
+import currencyPage from "../../page-objects/currencyPage";
+import cardsPage from "../../page-objects/cardsPage";
+import placePage from "../../page-objects/placePage";
 
 Given(`I access to the VEDI web`, () => {
   homePage.openPage();
@@ -37,14 +37,13 @@ And(
     utils.verifyURL("/#/iniciar-sesion");
     validationPage.entersCardNumber(debitCardNumber);
     validationPage.entersPassword(password);
-    utils.selectContinueButton();
+    validationPage.pressContinuarButton();
   }
 );
 
 Then("I can select a currency: {string}", (currency) => {
-  //cy.wait(25000); //TODO: Change it for a implicit wait
-  utils.waitApi("@login", 25000)
-  utils.verifyResponseCode("@login", 200);
+  cy.wait(25000); //TODO: Change it for a implicit wait
+  //utils.verifyResponseCode("@login", 200);
   currencyPage.selectCurrency(currency);
   utils.selectContinueButton();
   utils.verifyURL("/#/seleccion-moneda");
@@ -53,15 +52,16 @@ Then("I can select a currency: {string}", (currency) => {
 And(
   "I select to use card option: {string} and select a place: {string},{string}",
   (cardOption, region, city) => {
-    utils.verifyResponseCode("@affiliable-cards", 200);
+    //utils.waitForApi("@affiliable-cards")
+    //utils.verifyResponseCode("@affiliable-cards", 200);
     utils.verifyURL("/#/opcion-tarjeta");
     cardsPage.selectCardOption(cardOption);
     utils.selectContinueButton();
 
     utils.verifyResponseCode("@branch-offices", 200);
     utils.verifyURL("/#/seleccion-sucursal");
-    placePage.selectProvincia();
-    placePage.selectRegion();
+    placePage.selectProvincia(region);
+    placePage.selectRegion(city);
   }
 );
 

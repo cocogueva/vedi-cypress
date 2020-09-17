@@ -1,6 +1,6 @@
 class currencyPage {
-  static solesCheckbox = "#rbSoles";
-  static dolaresCheckbox = "#rbDolares";
+  static solesCheckbox = "#lblSoles";
+  static dolaresCheckbox = "#lblDolares";
 
   static selectCurrency(currency) {
     if (currency == "Soles") {

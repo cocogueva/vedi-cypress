@@ -3,7 +3,7 @@ Feature: Bank's active clients login
       As a customer I'm able to login using my debit card number and pasword
 
   Scenario Outline: Bank's customer logs in to VEDI
-    Given I acces to the VEDI web
+    Given I access to the VEDI web
      When I select product "<accountType>"
       And I identify myself with my "<document>"
       And I log in to VEDI with my "<debitCard>" and "<passsword>"

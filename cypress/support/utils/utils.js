@@ -22,7 +22,7 @@ class utils {
   }
 
   static selectContinueButton() {
-    cy.get("#btnLogin").click();
+    cy.get("#btnContinue").click();
   }
 
   static getSelectorByText(selectorType, text) {
