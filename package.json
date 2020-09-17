@@ -8,12 +8,13 @@
     "test:all": "cypress run --spec \"**/*.features\"",
     "cypress:certi": "cypress open",
     "cypress:prod": "cypress open --env baseUrl=https://www.abretucuenta.viabcp.com",
-    "login:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Login.feature'",
-    "login:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Login.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
-    "checking:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Checking.feature' --no-exit",
-    "checking:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Checking.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
-    "savings:certi": "cypress run -C cypress.json -b chrome --headless -s 'cypress/integration/vedi/Savings.feature'",
-    "savings:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/vedi/Savings.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
+    "login:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/Login.feature'",
+    "login:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/Login.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
+    "checking:certi": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/Checking.feature' --no-exit",
+    "checking:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/Checking.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
+    "savings:certi": "cypress run -C cypress.json -b chrome --headless -s 'cypress/integration/Savings.feature'",
+    "savings:certiP": "cypress run --record -C cypress.json -b chrome --headless -s 'cypress/integration/Savings.feature' --parallel",
+    "savings:prod": "cypress run -C cypress.json -b chrome --headed -s 'cypress/integration/Savings.feature' -e baseUrl=https://www.abretucuenta.viabcp.com",
     "@wip": "cypress-tags run -C cypress.json -e TAGS='@wip' -b chrome --no-exit"
   },
   "repository": {
@@ -25,7 +26,7 @@
     "cucumber",
     "testing"
   ],
-  "author": "Coco Guevara",
+  "author": "Coco Guevara, Carla Sandoval",
   "license": "Belatrix",
   "bugs": {
     "url": "https://github.com/TheBrainFamily/cypress-cucumber-example/issues"
@@ -37,14 +38,11 @@
     "cypress-cucumber-preprocessor": "^1.16.2"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "nonGlobalStepDefinitions": false,
+    "commonPath": "cypress/support/step_definitions/common/"
   },
   "devDependencies": {
-<<<<<<< HEAD
+    "@wdio/junit-reporter": "^6.5.1",
     "cypress": "^5.1.0"
-=======
-    "cypress": "^4.5.0",
-    "eslint": "^7.7.0"
->>>>>>> parent of d2c77ff... cypress@5.0.0 update
   }
 }
