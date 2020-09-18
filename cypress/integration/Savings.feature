@@ -16,9 +16,9 @@ Feature: Open savings account flow
     Examples:
       | accountType      | document | debitCard  | passsword | currency | cardOption  | region | city |
       | Cuenta Ilimitada | 29623550 | 6000010893 | 111111    | Soles    | sin-tarjeta | LIMA   | LIMA |
-
 #| Cuenta Digital   | 70779274 | 5500003804 | 111111    | Soles    | nueva-tarjeta | LA LIBERTAD | TRUJILLO |
 #| Cuenta Ilimitada | 70779263 | 5500003747 | 111111    | Dolares  | nueva-tarjeta | CUSCO       | CUSCO    |
+
 #| Cuenta Premio | 45451696 | 0550362358 | ****** | Dolares | nueva-tarjeta | LIMA | LIMA |
 #| Cuenta Ilimitada | 45451696 | 0550362358 | ****** | Soles   | sin-tarjeta   | LIMA | LIMA |
 #| Cuenta Digital   | 45451696 | 0550362358 | ******    | Soles   | sin-tarjeta |

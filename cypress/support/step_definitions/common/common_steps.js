@@ -1,12 +1,13 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import cardOptionPage from "../../page-objects/cardOptionPage";
+import selectBranchPage from "../../page-objects/selectBranchPage";
+import summaryPage from "../../page-objects/summaryPage";
 import homePage from "../../page-objects/homePage";
-import utils from "../../utils/utils";
 import accountsPage from "../../page-objects/accountsPage";
 import requirementsPage from "../../page-objects/requirementsPage";
 import validationPage from "../../page-objects/validationPage";
 import currencyPage from "../../page-objects/currencyPage";
-import cardsPage from "../../page-objects/cardsPage";
-import placePage from "../../page-objects/placePage";
+import utils from "../../utils/utils";
 
 Given(`I access to the VEDI web`, () => {
   homePage.openPage();
@@ -17,7 +18,7 @@ Given(`I access to the VEDI web`, () => {
 
 When("I select product {string}", (accountType) => {
   homePage.selectAccountType(homePage.getAccountCode(accountType));
-  utils.waitForApi("@app-params")
+  utils.waitForApi("@app-params");
   utils.verifyURL(
     "#/identificar-usuario?codProd=" + homePage.getAccountCode(accountType)
   );
@@ -52,111 +53,46 @@ Then("I can select a currency: {string}", (currency) => {
 And(
   "I select to use card option: {string} and select a place: {string},{string}",
   (cardOption, region, city) => {
-    //utils.waitForApi("@affiliable-cards")
-    //utils.verifyResponseCode("@affiliable-cards", 200);
-    utils.verifyURL("/#/opcion-tarjeta");
-    cardsPage.selectCardOption(cardOption);
-    utils.selectContinueButton();
+    //Seleccion de opcion de tarjeta
 
-    utils.verifyResponseCode("@branch-offices", 200);
-    utils.verifyURL("/#/seleccion-sucursal");
-    placePage.selectProvincia(region);
-    placePage.selectRegion(city);
+    cy.wait("@affiliable-cards").should((xhr) => {
+      expect(xhr.status, "Respuesta afiliable-cards").to.equal(200);
+    });
+
+    cardOptionPage.getUrl().should("include", "/#/opcion-tarjeta");
+    cardOptionPage.selectOption(cardOption);
+    cardOptionPage.clickContinue();
+
+    //Pantalla de seleccion de sucursal
+
+    cy.wait("@branch-offices").should((xhr) => {
+      expect(xhr.status, "Respuesta branch-offices").to.equal(200);
+    });
+
+    cardOptionPage.getUrl().should("include", "/#/seleccion-sucursal");
+    selectBranchPage.selectBranch(region, city);
+    cardOptionPage.clickContinue();
   }
 );
 
 When("I insert email {string}, acept the terms and confirm", (email) => {
-  cy.url().should("include", "/#/resumen-apertura");
+  cardOptionPage.getUrl().should("include", "/#/resumen-apertura");
 
-  //Conditional testing: looking if the addMail exist
-  cy.get("div.account-summary-bottom").then(($div) => {
-    if ($div.find("input#chkAddMail").length) {
-      cy.get("#chkAddMail")
-        .parent()
-        .click()
-        .get("#customerAddEmail")
-        .type(email);
-    } else {
-      cy.get("#customerEmail").type(email);
-    }
-  });
+  summaryPage.addEmail(email);
 
-  //Checkbox conditions
-  cy.get("#chkAgreement")
-    .click({
-      force: true,
-    })
-    //.get('#chkPdp').click({force:true})
-    .get("#chkPep")
-    .click({
-      force: true,
-    })
+  summaryPage.selectChkbox();
 
-    .get("#btnContinue")
-    .click();
+  cardOptionPage.clickContinue();
 });
 
 Then("I will see account creation confirm", () => {
-  var openApi;
+  cy.wait(utils.getSchedule).should((xhr) => {
+    expect(xhr.status, "Respuesta account-opening").to.equal(200);
+  });
 
-  var today = new Date();
-  var inicioExtend = new Date();
-  inicioExtend.setHours(20, 30, 0); // 8.30 pm
-  var finExtend = new Date();
-  finExtend.setHours(3, 59, 0); // 4.00 am
-
-  if (today >= inicioExtend && today <= finExtend) {
-    openApi = "@account-extends";
-  } else {
-    openApi = "@account-opening";
-  }
-
-  cy.wait(openApi)
-    .should((xhr) => {
-      expect(xhr.status, "Respuesta account-opening").to.equal(200);
-    })
-
-    .url()
-    .should("include", "/#/confirmacion-apertura");
+  cardOptionPage.getUrl().should("include", "/#/confirmacion-apertura");
 
   //.contains('ya tienes una nueva cuenta!').should('be.visible')
-});
-
-And("I answer equifax security questions", () => {
-  cy.get(".btn")
-    .contains("SI")
-    .click()
-
-    .wait("@equifax-questions")
-    .should((xhr) => {
-      expect(xhr.status, "Respuesta Authentication-questions").to.equal(200);
-    })
-
-    .url()
-    .should("include", "/#/equifax")
-
-    .get("#optionn-0-0")
-    .click({
-      force: true,
-    })
-
-    .get("#optionn-1-0")
-    .click({
-      force: true,
-    })
-
-    .get("#optionn-2-0")
-    .click({
-      force: true,
-    })
-
-    .get("#btnContinue")
-    .click()
-
-    .wait("@validate")
-    .should((xhr) => {
-      expect(xhr.status, "Respuesta equifax-validation").to.equal(200);
-    });
 });
 
 And("I will buy an insurance type {string}", (text) => {
@@ -172,9 +108,7 @@ And("I will buy an insurance type {string}", (text) => {
     .should("include", "/#/resumen")
 
     .get("#bcp-cb-0-lbl")
-    .click({
-      force: true,
-    })
+    .click({ force: true })
 
     .get(".btn.btn-primary")
     .click() //Finalizar compra

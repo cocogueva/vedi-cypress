@@ -42,7 +42,7 @@
     "commonPath": "cypress/support/step_definitions/common/"
   },
   "devDependencies": {
-    "@wdio/junit-reporter": "^6.5.1",
-    "cypress": "^5.1.0"
+    "cypress": "^5.1.0",
+    "@wdio/junit-reporter": "^6.5.1"
   }
 }

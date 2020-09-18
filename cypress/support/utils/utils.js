@@ -7,12 +7,12 @@ class utils {
     cy.get(apiName).its("status").should("deep.equal", responseCode);
   }
 
-  static waitForApi(apiName){
+  static waitForApi(apiName) {
     cy.wait(apiName);
   }
 
-  static waitApi(apiName, time){
-    cy.wait(apiName, {timeout: time});
+  static waitApi(apiName, time) {
+    cy.wait(apiName, { timeout: time });
   }
 
   static selectButton(locator) {
@@ -27,6 +27,24 @@ class utils {
 
   static getSelectorByText(selectorType, text) {
     cy.get(selectorType).contains(text);
+  }
+
+  static getSchedule() {
+    var openApi;
+
+    var today = new Date();
+    var inicioExtend = new Date();
+    inicioExtend.setHours(20, 30, 0); // 8.30 pm
+    var finExtend = new Date();
+    finExtend.setHours(3, 59, 0); // 4.00 am
+
+    if (today >= inicioExtend && today <= finExtend) {
+      openApi = "@account-extends";
+    } else {
+      openApi = "@account-opening";
+    }
+
+    return openApi;
   }
 
   //TODO Verify path in user-information
