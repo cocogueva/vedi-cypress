@@ -3,7 +3,7 @@ Feature: Open savings account flow
       As a customer I'm able to open a savings account
 
   Scenario Outline: Bank's customer opens a savings account
-    Given I acces to the VEDI web
+    Given I access to the VEDI web
      When I select product "<accountType>"
       And I identify myself with my "<document>"
       And I answer equifax security questions
