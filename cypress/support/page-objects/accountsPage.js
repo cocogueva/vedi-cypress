@@ -1,16 +1,11 @@
 class accountsPage {
   //Locators
   static dniInput = 'input[id="txtDNI"]';
-  static continuarButton = 'input[id="txtDNI"]';
   static captchaCode = "div.captcha-image img";
 
   //Actions
   static entersDNI(dniNumber) {
     cy.get(this.dniInput).type(dniNumber);
-  }
-
-  static pressContinuarButton() {
-    cy.get(this.continuarButton).click();
   }
 
   static entersCaptchaCode() {
