@@ -1,0 +1,6 @@
+{
+  "include": ["./node_modules/cypress", "cypress/support/**/*.js"],
+  "cucumberautocomplete.steps": ["**/*_steps.js"],
+  "cucumberautocomplete.syncfeatures": "**/*.feature",
+  "javascript.updateImportsOnFileMove.enabled": "always"
+}
