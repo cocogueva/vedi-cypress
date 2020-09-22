@@ -1,14 +1,20 @@
 class utils {
   static verifyURL(pageName) {
-    cy.url().should("include", pageName);
+    cy.url().should('include', pageName);
   }
 
   static verifyResponseCode(apiName, responseCode) {
-    cy.get(apiName).its("status").should("deep.equal", responseCode);
+    cy.get(apiName).its('status').should('deep.equal', responseCode);
+  }
+
+  static waitAndVerify(apiName, responseCode) {
+    cy.wait(apiName).should((xhr) => {
+      expect(xhr.status, 'Respuesta de '+apiName).to.equal(responseCode)
+    })
   }
 
   static waitForApi(apiName) {
-    cy.wait(apiName);
+    return cy.wait(apiName);
   }
 
   static waitApi(apiName, time) {

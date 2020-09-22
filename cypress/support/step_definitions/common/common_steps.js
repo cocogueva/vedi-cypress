@@ -26,15 +26,19 @@ When("I select product {string}", (accountType) => {
 
 And(`I identify myself with my {string}`, (dniNumber) => {
   accountsPage.entersDNI(dniNumber);
-  utils.verifyResponseCode("@captcha-builder", 200);
-  accountsPage.entersCaptchaCode();
+  utils.waitForApi("@captcha-builder").then( xhr => {  
+    
+    utils.verifyResponseCode("@captcha-builder",200)
+    var base64 = xhr.response.body["challenge"];
+    
+    accountsPage.entersCaptchaCode(base64);
+  })
+  
   utils.verifyResponseCode("@user-information", 200);
   requirementsPage.acceptRequirements();
 });
 
-And(
-  `I log in to VEDI with my {string} and {string}`,
-  (debitCardNumber, password) => {
+And(`I log in to VEDI with my {string} and {string}`,(debitCardNumber, password) => {
     utils.verifyURL("/#/iniciar-sesion");
     validationPage.entersCardNumber(debitCardNumber);
     validationPage.entersPassword(password);
@@ -50,9 +54,7 @@ Then("I can select a currency: {string}", (currency) => {
   utils.verifyURL("/#/seleccion-moneda");
 });
 
-And(
-  "I select to use card option: {string} and select a place: {string},{string}",
-  (cardOption, region, city) => {
+And("I select to use card option: {string} and select a place: {string},{string}",(cardOption, region, city) => {
     //Seleccion de opcion de tarjeta
 
     cy.wait("@affiliable-cards").should((xhr) => {
