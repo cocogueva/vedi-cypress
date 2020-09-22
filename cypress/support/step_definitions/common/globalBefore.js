@@ -5,7 +5,7 @@ beforeEach(() => {
   .route('POST', '/channel/vedi/account-opening/v2/user-identification/user-information').as('user-information')
   .route('GET', '/channel/vedi/account-opening/v2/app-params').as('app-params')
   .route('GET', '/channel/vedi/account-opening/v2/captcha/captcha-builder').as('captcha-builder')
-  .route('GET', '/channel/vedi/account-opening/v2/login').as('login')
+  .route('POST', '/channel/vedi/account-opening/v2/login').as('login')
   .route('POST','/channel/vedi/account-opening/v2/authentication-questions/validate').as('validate')
   .route('POST','/channel/vedi/account-opening/v2/authentication-questions').as('equifax-questions')
   .route('GET', '/channel/vedi/account-opening/v2/affiliable-cards?**').as('affiliable-cards')

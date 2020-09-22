@@ -1,13 +1,13 @@
 import {  Then, And } from "cypress-cucumber-preprocessor/steps";
+import utils from "../utils/utils";
 
 //Just the assertion previous steps are implemented at common steps.
 
 Then(`I'm logged so I'm the shit!`,() =>{
     
-    cy.wait('@login-request').should((xhr) => {
-        expect(xhr.status, 'successful POST').to.equal(200)        
-      })
-    .url().should('include', '/#/seleccion-moneda')
+  utils.waitApiTimeout('@login',15000)
+  utils.verifyResponseCode('@login',200)  
+  utils.verifyURL('/#/seleccion-moneda')
     
 });
 

@@ -47,8 +47,8 @@ And(`I log in to VEDI with my {string} and {string}`,(debitCardNumber, password)
 );
 
 Then("I can select a currency: {string}", (currency) => {
-  cy.wait(25000); //TODO: Change it for a implicit wait
-  //utils.verifyResponseCode("@login", 200);
+  utils.waitApi('@login')
+  utils.verifyResponseCode("@login", 200);
   currencyPage.selectCurrency(currency);
   utils.selectContinueButton();
   utils.verifyURL("/#/seleccion-moneda");

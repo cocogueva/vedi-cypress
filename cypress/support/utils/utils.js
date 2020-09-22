@@ -17,7 +17,7 @@ class utils {
     return cy.wait(apiName);
   }
 
-  static waitApi(apiName, time) {
+  static waitApiTimeout(apiName,time) {
     cy.wait(apiName, { timeout: time });
   }
 
