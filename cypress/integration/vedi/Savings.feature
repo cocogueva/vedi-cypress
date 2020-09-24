@@ -19,6 +19,5 @@ Feature: Open savings account flow
       #| Cuenta Digital   | 70779274 | 5500003804 | 111111    | Soles    | nueva-tarjeta | LA LIBERTAD | TRUJILLO |
       #| Cuenta Ilimitada | 70779263 | 5500003747 | 111111    | Dolares  | nueva-tarjeta | CUSCO       | CUSCO    |
       
-      #| Cuenta Premio | 45451696 | 0550362358 | ****** | Dolares | nueva-tarjeta | LIMA | LIMA |
-      #| Cuenta Ilimitada | 45451696 | 0550362358 | ****** | Soles   | sin-tarjeta   | LIMA | LIMA |
-      #| Cuenta Digital   | 45451696 | 0550362358 | ******    | Soles   | sin-tarjeta |
+      #| Cuenta Premio | 00000131 | 0534426618 | 192837    | Dolares | nueva-tarjeta | LIMA | LIMA |
+      #| Cuenta Ilimitada | 12121201 | 0553447149 | 111111    | | Soles   | sin-tarjeta   | LIMA | LIMA |
