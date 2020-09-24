@@ -47,8 +47,8 @@ And(`I log in to VEDI with my {string} and {string}`,(debitCardNumber, password)
 );
 
 Then("I can select a currency: {string}", (currency) => {
-  utils.waitApi('@login')
-  utils.verifyResponseCode("@login", 200);
+  utils.waitApiTimeout('@login',15000)
+  utils.verifyResponseCode('@login',200)  
   currencyPage.selectCurrency(currency);
   utils.selectContinueButton();
   utils.verifyURL("/#/seleccion-moneda");
@@ -57,7 +57,7 @@ Then("I can select a currency: {string}", (currency) => {
 And("I select to use card option: {string} and select a place: {string},{string}",(cardOption, region, city) => {
     //Seleccion de opcion de tarjeta
 
-    cy.wait("@affiliable-cards").should((xhr) => {
+    cy.wait('@affiliable-cards').should((xhr) => {
       expect(xhr.status, "Respuesta afiliable-cards").to.equal(200);
     });
 
@@ -88,9 +88,10 @@ When("I insert email {string}, acept the terms and confirm", (email) => {
 });
 
 Then("I will see account creation confirm", () => {
-  cy.wait(utils.getSchedule).should((xhr) => {
-    expect(xhr.status, "Respuesta account-opening").to.equal(200);
-  });
+  
+  const abc = utils.getSchedule()
+
+  utils.waitAndVerify(abc,200);
 
   cardOptionPage.getUrl().should("include", "/#/confirmacion-apertura");
 

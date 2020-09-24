@@ -45,9 +45,9 @@ class utils {
     finExtend.setHours(3, 59, 0); // 4.00 am
 
     if (today >= inicioExtend && today <= finExtend) {
-      openApi = "@account-extends";
+      openApi = '@account-extends';
     } else {
-      openApi = "@account-opening";
+      openApi = '@account-opening';
     }
 
     return openApi;

@@ -1,6 +1,6 @@
 class selectBranchPage {
     //Selectors
-    static region = '#[formcontrolname="region"] vd-dropdown-option div.dropdown-item';
+    static region = '[formcontrolname="region"] vd-dropdown-option div.dropdown-item';
     static city = '[formcontrolname="city"] vd-dropdown-option div.dropdown-item'
     
   
