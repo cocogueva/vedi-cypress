@@ -27,7 +27,7 @@ class utils {
     });
   }
 
-  static selectContinueButton() {
+  static clickContinue() {
     cy.get("#btnContinue").click();
   }
 

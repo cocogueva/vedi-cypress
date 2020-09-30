@@ -1,17 +1,6 @@
 class cardOptionPage {
   //Selectors
   static selector = '#btnContinues';
-  
-
-  //Action Methods
-  static getUrl() {
-    return cy.url() //Debe ir en una clase utils
-  }
-
-  static clickContinue() {
-      cy
-      .get('#btnContinue').click() //Debe ir en una clase utils
-  }
 
   static selectOption(cardOption) {
     

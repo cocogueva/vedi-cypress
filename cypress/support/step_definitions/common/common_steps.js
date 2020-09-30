@@ -50,7 +50,7 @@ Then("I can select a currency: {string}", (currency) => {
   utils.waitApiTimeout('@login',15000)
   utils.verifyResponseCode('@login',200)  
   currencyPage.selectCurrency(currency);
-  utils.selectContinueButton();
+  utils.clickContinue();
   utils.verifyURL("/#/seleccion-moneda");
 });
 
@@ -60,10 +60,9 @@ And("I select to use card option: {string} and select a place: {string},{string}
     cy.wait('@affiliable-cards').should((xhr) => {
       expect(xhr.status, "Respuesta afiliable-cards").to.equal(200);
     });
-
-    cardOptionPage.getUrl().should("include", "/#/opcion-tarjeta");
+    utils.verifyURL("/#/opcion-tarjeta");
     cardOptionPage.selectOption(cardOption);
-    cardOptionPage.clickContinue();
+    utils.clickContinue();
 
     //Pantalla de seleccion de sucursal
 
@@ -71,20 +70,20 @@ And("I select to use card option: {string} and select a place: {string},{string}
       expect(xhr.status, "Respuesta branch-offices").to.equal(200);
     });
 
-    cardOptionPage.getUrl().should("include", "/#/seleccion-sucursal");
+    utils.verifyURL("/#/seleccion-sucursal");
     selectBranchPage.selectBranch(region, city);
-    cardOptionPage.clickContinue();
+    utils.clickContinue();
   }
 );
 
 When("I insert email {string}, acept the terms and confirm", (email) => {
-  cardOptionPage.getUrl().should("include", "/#/resumen-apertura");
+  utils.verifyURL("/#/resumen-apertura");
 
   summaryPage.addEmail(email);
 
   summaryPage.selectChkbox();
 
-  cardOptionPage.clickContinue();
+  utils.clickContinue();
 });
 
 Then("I will see account creation confirm", () => {
@@ -92,8 +91,8 @@ Then("I will see account creation confirm", () => {
   const abc = utils.getSchedule()
 
   utils.waitAndVerify(abc,200);
-
-  cardOptionPage.getUrl().should("include", "/#/confirmacion-apertura");
+  
+  utils.verifyURL("/#/confirmacion-apertura");
 
   //.contains('ya tienes una nueva cuenta!').should('be.visible')
 });
