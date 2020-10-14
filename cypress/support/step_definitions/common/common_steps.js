@@ -17,7 +17,8 @@ Given(`I access to the VEDI web`, () => {
 });
 
 When("I select product {string}", (accountType) => {
-  homePage.selectAccountType(homePage.getAccountCode(accountType));
+  //homePage.selectAccountType(homePage.getAccountCode(accountType)); //Works for PROD *Coco 12/10
+  homePage.selectAccountByText(accountType) //Works for CERTI *Coco 12/10
   utils.waitForApi("@app-params");
   utils.verifyURL(
     "#/identificar-usuario?codProd=" + homePage.getAccountCode(accountType)
@@ -47,7 +48,7 @@ And(`I log in to VEDI with my {string} and {string}`,(debitCardNumber, password)
 );
 
 Then("I can select a currency: {string}", (currency) => {
-  utils.waitApiTimeout('@login',15000)
+  utils.waitApiTimeout('@login',25000)
   utils.verifyResponseCode('@login',200)  
   currencyPage.selectCurrency(currency);
   utils.clickContinue();

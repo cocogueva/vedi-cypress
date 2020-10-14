@@ -11,7 +11,7 @@ Feature: Users can indentify themselve
      Then VEDI identifies me as "<name>" and <path>
     
     Examples:
-      | accountType      | document | name        | path |
-      | Cuenta Ilimitada | 45451696 | Jorge Mateo | 1    |
+      | accountType      | document | name | path |
+      | Cuenta Ilimitada | 29623550 | NHBK | 0    |
       
         

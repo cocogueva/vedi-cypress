@@ -25,6 +25,12 @@ class homePage {
       force: true,
     });
   }
+
+  static selectAccountByText(tipoCuenta) {
+    cy.contains(tipoCuenta).click()
+  }
+
+  
 }
 
 export default homePage;

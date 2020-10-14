@@ -10,7 +10,7 @@ Then(`VEDI identifies me as {string} and {int}`, (name,path) => {
       "names": name ,"path": path
     })
 
-    cy.url().should('include', '/#/requisitos')
+    cy.url().should('include', '/#/iniciar-sesion')
 
   })
 
