@@ -7,7 +7,6 @@
     "API_KEY": "1a26557117038f3c3a04179212e5859f",
     "auto-captcha": false
   },
-  "retries": 2,
   "screenshotOnRunFailure": true,
   "projectId": "c89kyf"
 }

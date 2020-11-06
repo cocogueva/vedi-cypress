@@ -15,6 +15,6 @@ Feature: Open savings account flow
 
     Examples:
       | accountType   | document | currency | cardOption    | region | city  |
-      | Cuenta Premio | 45451696 | Dolares  | nueva-tarjeta | CUSCO  | CUSCO |
+      | Cuenta Premio | 43105562 | Dolares  | nueva-tarjeta | CUSCO  | CUSCO |
       #| Cuenta Ilimitada | 70779263 | Dolares  | vincular-tarjeta |
       #| Cuenta Digital   | 70779274 | Dolares  | sin-tarjeta   |
